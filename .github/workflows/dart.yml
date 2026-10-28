@@ -1,0 +1,42 @@
+name: Dart
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+
+      - name: Install melos
+        run: dart pub global activate melos ^8.0.0
+
+      - name: Bootstrap workspace
+        run: melos bootstrap
+
+      - name: Code generation
+        run: melos run build
+
+      - name: Analyze
+        run: melos run analyze
+
+      - name: Check formatting
+        run: melos run format-check
+
+      - name: Test
+        run: melos run test
+
+      - name: Verify no generated-code drift
+        run: git diff --exit-code

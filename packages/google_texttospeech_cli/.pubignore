@@ -1,0 +1,13 @@
+# Keep runtime artifacts and credentials out of the published package.
+# (Git-ignored files are already excluded by pub; these are belt-and-suspenders.)
+*.mp3
+*.raw
+*.wav
+*.ogg
+dial.*
+client_secret.json
+client_secret_*.json
+tts_access_tokens.json
+access_tokens.json
+*.iml
+.dart_tool/

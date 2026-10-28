@@ -1,0 +1,11 @@
+name: examples
+version: 0.0.1
+description: Examples for the google_texttospeech package.
+publish_to: none
+
+environment:
+  sdk: ^3.8.0
+
+dependencies:
+  google_texttospeech:
+    path: ../

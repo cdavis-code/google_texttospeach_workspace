@@ -1,0 +1,14 @@
+targets:
+  $default:
+    sources:
+      exclude:
+        - "**/*.g.dart"
+    builders:
+      json_serializable:
+        options:
+          create_to_json: true
+          create_factory: true
+          explicit_to_json: true
+          # Omit null fields so request bodies don't send `ssml: null` etc.,
+          # which Google maps into the text/ssml proto oneof and rejects (400).
+          include_if_null: false

@@ -1,0 +1,36 @@
+name: google_texttospeech_cli
+version: 0.1.0
+description: A CLI tool for the Google Cloud Text-to-Speech REST API.
+homepage: https://github.com/cdavis-code/google_texttospeach_workspace
+repository: https://github.com/cdavis-code/google_texttospeach_workspace/tree/main/packages/google_texttospeech_cli
+issue_tracker: https://github.com/cdavis-code/google_texttospeach_workspace/issues
+
+topics:
+  - cli
+  - text-to-speech
+  - google
+  - api
+  - oauth2
+
+funding:
+  - https://www.buymeacoffee.com/cdavis
+
+resolution: workspace
+
+environment:
+  sdk: ^3.8.0
+
+executables:
+  tts: tts
+
+dependencies:
+  google_texttospeech: ^0.1.0
+  args: ^2.7.0
+  dio: ^5.9.2
+  loggy: ^2.0.3
+  oauth2: ^2.0.5
+  universal_io: ^2.3.1
+
+dev_dependencies:
+  lints: ^6.1.0
+  test: ^1.26.0

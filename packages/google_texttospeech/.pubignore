@@ -1,0 +1,25 @@
+# example/ is intentionally shipped — pub.dev scores packages that include it.
+
+build/
+ios/
+android/
+scratch/
+tool/
+
+notes.txt
+
+.dart_tool/
+doc/
+
+*.iml
+
+# Keep runtime artifacts and credentials out of the package.
+*.mp3
+*.raw
+*.wav
+*.ogg
+client_secret.json
+client_secret_*.json
+tts_access_tokens.json
+access_tokens.json
+.env

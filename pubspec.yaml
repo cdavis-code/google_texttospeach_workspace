@@ -1,0 +1,70 @@
+name: google_texttospeech_workspace
+publish_to: none
+
+environment:
+  sdk: ^3.8.0
+
+workspace:
+  - packages/google_texttospeech
+  - packages/google_texttospeech_cli
+
+dev_dependencies:
+  melos: ^8.0.0
+
+melos:
+  name: google_texttospeech_workspace
+  packages:
+    - packages/**
+    - '!packages/**/example'
+
+  command:
+    bootstrap:
+      runPubGetInParallel: false
+      usePubspecOverrides: true
+
+  scripts:
+    lint:all:
+      run: melos run analyze && melos run format-check
+    dep:
+      exec:
+        command: dart pub get
+        concurrency: 1
+    build:
+      exec:
+        command: dart run build_runner build
+        concurrency: 1
+      packageFilters:
+        fileExists: build.yaml
+    meta:
+      run: melos run _meta_internal --no-select
+      description: Regenerate lib/meta.dart from pubspec.yaml.
+    _meta_internal:
+      exec:
+        command: dart ../../tool/update_meta.dart
+        concurrency: 1
+      packageFilters:
+        scope:
+          - google_texttospeech
+          - google_texttospeech_cli
+    analyze:
+      exec:
+        command: dart analyze --fatal-infos
+        concurrency: 1
+    format:
+      exec:
+        command: dart format .
+        concurrency: 1
+    format-check:
+      run: dart format --output=none --set-exit-if-changed .
+    test:
+      run: melos run _test_internal --no-select
+    _test_internal:
+      exec:
+        command: dart test
+        concurrency: 1
+      packageFilters:
+        dirExists: test
+    dartdoc:
+      run: dart doc
+      packageFilters:
+        scope: google_texttospeech
