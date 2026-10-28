@@ -1,0 +1,38 @@
+name: Publish to pub.dev
+
+# Trusted publishing: `dart pub publish` uses the OIDC id token below, so no
+# PUB_DEV_CREDENTIALS secret is needed. On pub.dev, set each package's trusted
+# publisher to THIS repo, workflow `publish.yml`, and the matching tag ref.
+on:
+  push:
+    tags:
+      - "google_texttospeech-v*"
+      - "google_texttospeech_cli-v*"
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dart-lang/setup-dart@v1
+
+      - name: Resolve package from tag
+        id: pkg
+        run: |
+          case "${GITHUB_REF_NAME}" in
+            google_texttospeech_cli-v*) echo "pkg=google_texttospeech_cli" >> "$GITHUB_OUTPUT" ;;
+            google_texttospeech-v*)      echo "pkg=google_texttospeech"     >> "$GITHUB_OUTPUT" ;;
+            *) echo "unmatched tag ${GITHUB_REF_NAME}"; exit 1 ;;
+          esac
+
+      - name: Workspace pub get
+        run: dart pub get
+
+      - name: Publish
+        working-directory: packages/${{ steps.pkg.outputs.pkg }}
+        run: dart pub publish --force
