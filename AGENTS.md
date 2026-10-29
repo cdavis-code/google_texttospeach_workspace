@@ -15,6 +15,12 @@ the CLI).
 |---------|---------|
 | `packages/google_texttospeech` | Core library - Cloud Text-to-Speech v1 API |
 | `packages/google_texttospeech_cli` | `tts` CLI tool |
+| `packages/google_texttospeech_js` | dart2js + TypeScript/npm bindings → `@unngh/google-texttospeech` |
+
+`google_texttospeech_js` is a Dart workspace member (so `melos bootstrap` /
+`melos run analyze` cover its Dart interop) but is **excluded from `melos run
+test`** (its tests are vitest) and builds via `npm run build` (`scripts/build.sh`
+→ dart2js, then `tsup`). Its `node_modules`/`build`/`dist` are gitignored.
 
 `third_party/` is a local-only copy of the reference repo used as the port
 source; it is gitignored, not product code.
