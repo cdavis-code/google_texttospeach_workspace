@@ -7,6 +7,7 @@ environment:
 workspace:
   - packages/google_texttospeech
   - packages/google_texttospeech_cli
+  - packages/google_texttospeech_js
 
 dev_dependencies:
   melos: ^8.0.0
@@ -64,6 +65,8 @@ melos:
         concurrency: 1
       packageFilters:
         dirExists: test
+        ignore:
+          - google_texttospeech_js
     dartdoc:
       run: dart doc
       packageFilters:

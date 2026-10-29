@@ -1,0 +1,17 @@
+name: google_texttospeech_js
+description: JavaScript/TypeScript bindings for the google_texttospeech Dart package. Universal (browser + Node.js) client for the Google Cloud Text-to-Speech REST API v1, compiled via dart2js.
+version: 0.1.0
+publish_to: none
+repository: https://github.com/cdavis-code/google_texttospeach_workspace/tree/main/packages/google_texttospeech_js
+
+resolution: workspace
+
+environment:
+  sdk: ^3.8.0
+
+dependencies:
+  google_texttospeech: ^0.1.0
+  loggy: ^2.0.3
+
+dev_dependencies:
+  lints: ^6.1.0
